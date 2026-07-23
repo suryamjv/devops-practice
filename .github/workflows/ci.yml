@@ -68,13 +68,16 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: devops-practice:${{ github.sha }}
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: "1"
-          format: table
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v ${HOME}/.cache/trivy:/root/.cache/trivy \
+            aquasec/trivy:0.72.0 image \
+              --severity HIGH,CRITICAL \
+              --ignore-unfixed \
+              --exit-code 1 \
+              --format table \
+              devops-practice:${{ github.sha }}
 
       - name: Log in to GHCR
         if: github.event_name == 'push'
