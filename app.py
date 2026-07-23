@@ -41,7 +41,7 @@ def health():
     try:
         with get_conn() as conn, conn.cursor() as cur:
             cur.execute("SELECT 1")
-        return jsonify(status="healthy"), 200
+        return jsonify(status="Ok"), 200
     except Exception as e:
         return jsonify(status="unhealthy", error=str(e)), 503
 
