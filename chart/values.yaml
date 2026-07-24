@@ -1,0 +1,28 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/suryamjv/devops-practice
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8000
+  nodePort: 30080
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 256Mi
+
+postgres:
+  enabled: true
+  image: postgres:16-alpine
+  storage: 1Gi
+
+db:
+  name: visitsdb
+  user: appuser
+  password: changeme
