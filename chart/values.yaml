@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: ghcr.io/suryamjv/devops-practice
-  tag: latest
+  tag: "fe29b88c2898a5390637cf06d172962e571e8ef7"
   pullPolicy: IfNotPresent
 
 service:
